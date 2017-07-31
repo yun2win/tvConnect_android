@@ -18,9 +18,9 @@ import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.liyueyun.talklib.Back;
-import com.liyueyun.talklib.ResultCode;
 import com.liyueyun.talklib.TalkManage;
 import com.liyueyun.talksdk.common.SharedPreferenceUtil;
 import com.liyueyun.talksdk.model.TalkTvEntity;
@@ -112,34 +112,7 @@ public class GalleryActivity extends FragmentActivity {
         right_connect_tv.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                dialog_Select_Tv(activity, new Back.Result<TalkTvEntity>() {
-                    @Override
-                    public void onSuccess(TalkTvEntity talkTvEntity) {
-                        current_TalkTv = talkTvEntity;
-                        String message = TalkManage.getInstance().galleryMsg("image",imgUrls[currentPage],imgUrls[currentPage]);
-                        TalkManage.getInstance().pushMessageTv(message, current_TalkTv.getTv_userId(),new Back.Callback() {
-                            @Override
-                            public void onSuccess() {
-
-                                handler.sendEmptyMessage(1);
-                            }
-
-                            @Override
-                            public void onError(int code, String error) {
-                            }
-                        });
-                    }
-                    @Override
-                    public void onError(int code, String error) {
-                    }
-
-                    @Override
-                    public void OnEvent(int code, String event) {
-                         if(code==500){
-                             startActivityForResult(new Intent(GalleryActivity.this, CaptureActivity.class), 101);
-                         }
-                    }
-                });
+                dialog_Select_Tv(GalleryActivity.this);
             }
         });
     }
@@ -196,6 +169,7 @@ public class GalleryActivity extends FragmentActivity {
 
                         @Override
                         public void onError(int code, String error) {
+                            Toast.makeText(GalleryActivity.this,error,Toast.LENGTH_LONG).show();
                         }
                     });
                 }
@@ -225,14 +199,15 @@ public class GalleryActivity extends FragmentActivity {
 
                 @Override
                 public void onError(int code, String error) {
+                    Toast.makeText(GalleryActivity.this,error,Toast.LENGTH_LONG).show();
                 }
             });
         }
     }
 
-    public void dialog_Select_Tv(Context context, final Back.Result<TalkTvEntity> result){
-        if(context==null||result==null) {
-            result.onError(ResultCode.PARAME,"参数错误");
+    public void dialog_Select_Tv(Context context){
+        if(context==null) {
+            Toast.makeText(context,"参数错误",Toast.LENGTH_LONG).show();
             return;
         }
         final Dialog dialog = new Dialog(context);
@@ -260,7 +235,7 @@ public class GalleryActivity extends FragmentActivity {
             @Override
             public void onClick(View view) {
                 //扫描
-                result.OnEvent(500,"调用摄像头扫描tv");
+                startActivityForResult(new Intent(GalleryActivity.this, CaptureActivity.class), 101);
                 dialog.dismiss();
             }
         });
@@ -284,7 +259,21 @@ public class GalleryActivity extends FragmentActivity {
         gridview_tv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                result.onSuccess(tvEntities.get(i));
+                current_TalkTv = tvEntities.get(i);
+                String message = TalkManage.getInstance().galleryMsg("image",imgUrls[currentPage],imgUrls[currentPage]);
+                TalkManage.getInstance().pushMessageTv(message, current_TalkTv.getTv_userId(),new Back.Callback() {
+                    @Override
+                    public void onSuccess() {
+
+                        handler.sendEmptyMessage(1);
+                    }
+
+                    @Override
+                    public void onError(int code, String error) {
+                        Toast.makeText(GalleryActivity.this,error,Toast.LENGTH_LONG).show();
+                    }
+                });
+
                 dialog.dismiss();
             }
         });
@@ -307,9 +296,9 @@ public class GalleryActivity extends FragmentActivity {
                         String str1 = tv1[1];
                         String tvIds[] = str1.split("/");
                         if (!IMStringUtil.isEmpty(tvIds[0])) {
-                            String deviceId = tvIds[0];
+                            String deviceId = tvIds[0];//电视的UserId
                             String tv2[]= result.split("/?name=");
-                            String tvName="新的电视";
+                            String tvName="新的电视";//电视的名字
                               if(tv2.length>1){
                                   tvName = tv2[1];
                                   try {
@@ -318,30 +307,7 @@ public class GalleryActivity extends FragmentActivity {
                                   }
                               }
 
-                           add2ConnectTv(GalleryActivity.this, deviceId, tvName, new Back.Result<TalkTvEntity>() {
-                                @Override
-                                public void onSuccess(TalkTvEntity talkTvEntity) {
-                                    current_TalkTv = talkTvEntity;
-                                    String message = TalkManage.getInstance().galleryMsg("image",imgUrls[currentPage],imgUrls[currentPage]);
-                                    TalkManage.getInstance().pushMessageTv(message,current_TalkTv.getTv_userId(), new Back.Callback() {
-                                        @Override
-                                        public void onSuccess() {
-                                            handler.sendEmptyMessage(1);
-                                        }
-                                        @Override
-                                        public void onError(int code, String error) {
-                                        }
-                                    });
-                                }
-                                @Override
-                                public void onError(int code, String error) {
-
-                                }
-                                @Override
-                                public void OnEvent(int code, String event) {
-
-                                }
-                            });
+                           add2ConnectTv(GalleryActivity.this, deviceId, tvName);
                         }
                     }
                 }
@@ -351,10 +317,9 @@ public class GalleryActivity extends FragmentActivity {
     }
 
     //添加tv并连接
-    public void add2ConnectTv(Context context,String tv_userId,String tv_name,Back.Result<TalkTvEntity> result){
+    public void add2ConnectTv(Context context,String tv_userId,String tv_name){
         if(context==null||IMStringUtil.isEmpty(tv_userId)||IMStringUtil.isEmpty(tv_name)){
-            if(result!=null)
-                result.onError(ResultCode.PARAME,"参数错误");
+            Toast.makeText(context,"参数错误",Toast.LENGTH_LONG).show();
             return;
         }
         String tvlist = SharedPreferenceUtil.getTalkTvList(context);
@@ -377,7 +342,18 @@ public class GalleryActivity extends FragmentActivity {
         for(TalkTvEntity talktv:tvEntities){
             if(talktv.getTv_userId().equals(tv_userId)){
                 find = true;
-                result.onSuccess(talktv);
+                current_TalkTv = talktv;
+                String message = TalkManage.getInstance().galleryMsg("image",imgUrls[currentPage],imgUrls[currentPage]);
+                TalkManage.getInstance().pushMessageTv(message,current_TalkTv.getTv_userId(), new Back.Callback() {
+                    @Override
+                    public void onSuccess() {
+                        handler.sendEmptyMessage(1);
+                    }
+                    @Override
+                    public void onError(int code, String error) {
+                        Toast.makeText(GalleryActivity.this,error,Toast.LENGTH_LONG).show();
+                    }
+                });
                 break;
             }
         }
@@ -402,7 +378,18 @@ public class GalleryActivity extends FragmentActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            result.onSuccess(talktv);
+            current_TalkTv = talktv;
+            String message = TalkManage.getInstance().galleryMsg("image",imgUrls[currentPage],imgUrls[currentPage]);
+            TalkManage.getInstance().pushMessageTv(message,current_TalkTv.getTv_userId(), new Back.Callback() {
+                @Override
+                public void onSuccess() {
+                    handler.sendEmptyMessage(1);
+                }
+                @Override
+                public void onError(int code, String error) {
+                    Toast.makeText(GalleryActivity.this,error,Toast.LENGTH_LONG).show();
+                }
+            });
         }
     }
 }
