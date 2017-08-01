@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_preview"
+    android:background="#f3f5f7"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_vertical">
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="48dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingRight="10dp" >
+            <ImageButton
+                android:id="@+id/left_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:background="@null"
+                android:visibility="gone"
+                android:paddingLeft="8dp"
+                android:paddingRight="15dp"
+                android:scaleType="centerInside"
+                android:src="@mipmap/gallery_back" />
+            <TextView
+                android:id="@+id/text_title"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:maxLength="20"
+                android:ellipsize="middle"
+                android:singleLine="true"
+                android:layout_weight="1"
+                android:textColor="#222222"
+                android:textSize="18sp"
+                android:gravity="left"
+                android:text="" />
+
+            <ImageButton
+                android:id="@+id/right_connect_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_gravity="center_vertical"
+                android:background="@null"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:scaleType="centerInside"
+                android:src="@mipmap/connect_tv" />
+
+        </LinearLayout>
+        <TextView
+            android:id="@+id/viewline"
+            android:layout_width="fill_parent"
+            android:layout_height="0.5dp"
+            android:background="#d7d7d7"/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <com.liyueyun.talkdemo.ui.weight.PhotoViewPager
+            android:id="@+id/vp_image_viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible" >
+        </com.liyueyun.talkdemo.ui.weight.PhotoViewPager>
+
+        <TextView
+            android:id="@+id/tv_image_index"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="15dp"
+            android:text=""
+            android:textColor="#ffffff"
+            android:textSize="16sp"
+            />
+
+    </RelativeLayout>
+
+
+</LinearLayout>
