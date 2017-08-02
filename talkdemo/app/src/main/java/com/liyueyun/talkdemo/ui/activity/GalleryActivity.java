@@ -17,6 +17,7 @@ import com.liyueyun.talklib.model.TalkTvEntity;
 import com.liyueyun.talkdemo.ui.adapter.ImageFragementPagerAdapter;
 import com.liyueyun.talkdemo.ui.fragment.MoreImageBrowseFragment;
 import com.liyueyun.talkdemo.ui.weight.PhotoViewPager;
+import com.liyueyun.talklib.ui.activity.CaptureActivity;
 import com.yun2win.talksdk.Back;
 import com.yun2win.talksdk.TalkManage;
 import com.yun2win.utils.IMStringUtil;
@@ -73,7 +74,10 @@ public class GalleryActivity extends FragmentActivity {
                     }
                     @Override
                     public void OnEvent(int i, String s) {
-
+                      /*  if(i==500){
+                            context.startActivityForResult(new Intent(context, CaptureActivity.class), 101);
+                            //用户自己的扫描界面
+                        }*/
                     }
                 });
             }

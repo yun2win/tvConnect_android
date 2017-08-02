@@ -52,6 +52,11 @@ public class TvManage {
         this.current_TalkTv = current_TalkTv;
     }
 
+    /**
+     * 显示电视列表
+     * @param context 应用上下文
+     * @param result  回调返回用户选择的电视或者错误码
+     */
     public void dialog_Select_Tv(final Activity context, final Back.Result<TalkTvEntity> result){
         if(context==null) {
             Toast.makeText(context,"参数错误",Toast.LENGTH_LONG).show();
@@ -86,6 +91,7 @@ public class TvManage {
                 //扫描
                 context.startActivityForResult(new Intent(context, CaptureActivity.class), 101);
                 tvListDialog.dismiss();
+                //result.OnEvent(500,"调用用户的扫描界面");
             }
         });
         TextView tv_close = (TextView) tvListDialog.findViewById(R.id.tv_close);
@@ -122,6 +128,12 @@ public class TvManage {
         });
     }
 
+    /**
+     *
+     * @param context 应用上下文
+     * @param result 扫描的内容
+     * @param backResult 解析扫描结果返回的电视或错误码
+     */
     public void ParseScanTv(Context context,String result,final Back.Result<TalkTvEntity> backResult){
         String tv1[] = result.split("tv/");
         if (tv1.length > 1) {
@@ -144,7 +156,7 @@ public class TvManage {
         }
     }
     //添加tv并连接
-    public  void add2ConnectTv(Context context,String tv_userId,String tv_name,final Back.Result<TalkTvEntity> backResult){
+    private  void add2ConnectTv(Context context,String tv_userId,String tv_name,final Back.Result<TalkTvEntity> backResult){
         if(context==null||IMStringUtil.isEmpty(tv_userId)||IMStringUtil.isEmpty(tv_name)){
             Toast.makeText(context,"参数错误",Toast.LENGTH_LONG).show();
             return;
