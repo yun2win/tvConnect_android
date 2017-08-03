@@ -8,7 +8,6 @@ tvConnect_android1.0 SDK开发android版，提供用户接入我们SDK，能够�
 ### 快速接入
 #### 1.下载Module下的talklib并导入您的应用作为依赖工程
 #### 2.配置文件添加如下代码
-     `
      ........
         <!-- 加入应用需要的权限 -->
         <!-- 网络相关 -->
@@ -24,7 +23,6 @@ tvConnect_android1.0 SDK开发android版，提供用户接入我们SDK，能够�
         <activity
                 android:name="com.liyueyun.talklib.ui.activity.CaptureActivity"
                 android:screenOrientation="portrait" />        
-    `
 #### 3.项目Application类onCreate()中初始化（回调可不传，判断是否初始化成功）
 
 `TalkManage.getInstance().initTalk(this, "用户的UserId（可传空字符串）","用户的UserId（可传空字符串，默认显示陌生人）","用户头像Url（可传空字符串）", "AppKey（必填）","AppSecret（必填）",null});                                                                         `
