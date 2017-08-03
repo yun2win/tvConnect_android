@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/line_context"
+    android:orientation="vertical" >
+            <LinearLayout
+                android:id="@+id/ll_title"
+                android:layout_width="fill_parent"
+                android:background="#edecf2"
+                android:layout_height="45dp">
+                <TextView
+                    android:id="@+id/tv_close"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingLeft="20dp"
+                    android:textSize="15sp"
+                    android:textColor="#666666"
+                    android:text="取消"/>
+                <TextView
+                    android:id="@+id/titile_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textSize="18sp"
+                    android:textColor="#222222"
+                    android:text="选择电视"/>
+                <ImageView
+                    android:id="@+id/title_tvscan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:padding="10dp"
+                    android:src="@mipmap/talk_tv_scan"/>
+            </LinearLayout>
+            <!--	<View
+                    android:id="@+id/titile_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_0.5"
+                    android:layout_below="@+id/ll_title"
+                    android:background="#d7d7d7"/>-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_below="@+id/ll_title"
+                android:background="#ffffff"
+                android:paddingBottom="10dp"
+                android:orientation="vertical">
+                <GridView
+                    android:id="@+id/gridview_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:numColumns="3"/>
+
+                <TextView
+                    android:id="@+id/no_tvlist"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:text="您没有任何电视，请先扫描电视"/>
+            </LinearLayout>
+
+</RelativeLayout>

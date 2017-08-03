@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/line_context"
+    android:orientation="vertical" >
+    <LinearLayout
+        android:id="@+id/ll_tv1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:gravity="center">
+        <ImageView
+            android:id="@+id/divice_icon1"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginBottom="8dp"
+            android:src="@mipmap/talk_tv_online"/>
+        <TextView
+            android:id="@+id/divice_name1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#353535"
+            android:textSize="15sp"
+            android:text="会议室"
+            android:singleLine="true"
+            android:ellipsize="end"/>
+        <TextView
+            android:id="@+id/divice_status1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#999999"
+            android:textSize="12sp"
+            android:text="连接"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:singleLine="true"
+            android:ellipsize="end"/>
+    </LinearLayout>
+</RelativeLayout>
