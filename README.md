@@ -1,5 +1,6 @@
 [![LOGO](http://8225117.s21i-8.faiusr.com/4/ABUIABAEGAAg5o3ztwUoivKDrgQwuAE4Mg.png)](http://www.yun2win.com)
-# # tvConnect_android1.0
+### tvConnect_android1.0
+
 tvConnect_android1.0 SDK开发android版，提供用户接入我们SDK，能够把图片快速的投屏到电视，大屏看图片，用户不需要开发电视版应用及可实现电视看图片。
 -
 ### 编译环境
@@ -51,7 +52,7 @@ Server : https://github.com/yun2win/yun2win-sdk-server<br>
 
 -
 ### License
-liyueyun-SDK-android is available under the MIT license. See the [LICENSE](https://github.com/yun2win/yun2win-sdk-android/blob/master/LICENSE) file for more info.
+tvConnect-android is available under the MIT license. See the [LICENSE](https://github.com/yun2win/tvConnect_android/blob/master/LICENSE) file for more info.
 
 
 
