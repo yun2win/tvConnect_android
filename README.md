@@ -5,6 +5,7 @@ tvConnect_android1.0 SDK开发android版，提供用户接入我们SDK，能够�
 -
 ### 编译环境
 编译环境：android studio 2.2.2
+
 -
 ### 快速接入
 #### 1.下载Module下的talklib并导入您的应用作为依赖工程
