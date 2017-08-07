@@ -2,6 +2,7 @@
 ### tvConnect_android1.0
 
 tvConnect_android1.0 SDK开发android版，提供用户接入我们SDK，能够把图片快速的投屏到电视，大屏看图片，用户不需要开发电视版应用及可实现电视看图片。
+
 -
 ### 编译环境
 编译环境：android studio 2.2.2
